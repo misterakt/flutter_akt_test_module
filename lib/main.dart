@@ -1,8 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:quickblox_sdk/quickblox_sdk.dart';
+import './login.dart';
 import './question.dart';
 import './answer.dart';
 
-void main() => runApp(MyApp());
+//void main() => runApp(MyApp());
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  const String APP_ID = "96100";
+  const String AUTH_KEY = "fRJC2X9sXA4K3mX";
+  const String AUTH_SECRET = "VfjX8EhROpCBsmq";
+  const String ACCOUNT_KEY = "svTT2TMJrRxLw6ee7xsh";
+  const String API_ENDPOINT = ""; //optional
+  const String CHAT_ENDPOINT = ""; //optional
+
+  try {
+    await QB.settings.init(APP_ID, AUTH_KEY, AUTH_SECRET, ACCOUNT_KEY,
+        apiEndpoint: API_ENDPOINT, chatEndpoint: CHAT_ENDPOINT);
+  } catch (e) {
+    print(e.toString());
+  }
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -42,20 +64,11 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            title: Text('My First App'),
-          ),
-          body: Column(
-            children: [
-              Question(
-                _questions[_questionIndex]['questionText'] as String,
-              ),
-              ...(_questions[_questionIndex]['answer'] as List<String>)
-                  .map((answer) {
-                return Answer(_answerQuestion, answer);
-              }).toList()
-            ],
-          )),
+        appBar: AppBar(
+          title: Text('My First App'),
+        ),
+        body: Login(),
+      ),
     );
   }
 }
