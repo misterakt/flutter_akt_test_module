@@ -88,7 +88,9 @@ class _HomeState extends State<Home> {
   _sendChat() async {
     try {
       await QB.chat.sendMessage("625da73f32eaaf0022ce65b3",
-          body: "Test send a message", markable: false, saveToHistory: true);
+          body: "Test send a message------2222",
+          markable: false,
+          saveToHistory: true);
     } catch (e) {
       print("send chat");
       print(e.toString());
